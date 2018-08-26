@@ -97,11 +97,13 @@ height: 3rem;
 		<a href="#menu">Menu</a>
 	</header>
 
-	<!-- Nav -->
+<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-			<li><a href="/board/list">Home</a></li>
-			<li><a href="/up/ajax">Image gallery</a></li>
+			<li><a href="/home">Home</a></li>
+			<li><a href="/up/ajax">Best Food Truck</a></li>
+			<li><a href="/freeboard/list">Free Board</a></li>
+			<li><a href="/member/memberlist">Management Board</a></li>
 		</ul>
 	</nav>
 

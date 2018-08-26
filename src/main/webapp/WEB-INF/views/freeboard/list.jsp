@@ -147,11 +147,13 @@ text-align: left;
 		</div>
 		<a href="#menu">Menu</a>
 	</header>
-	<!-- Nav -->
+<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-			<li><a href="/freeboard/list">Home</a></li>
-			<li><a href="/up/ajax">Image gallery</a></li>
+			<li><a href="/home">Home</a></li>
+			<li><a href="/up/ajax">Best Food Truck</a></li>
+			<li><a href="/freeboard/list">Free Board</a></li>
+			<li><a href="/member/memberlist">Management Board</a></li>
 		</ul>
 	</nav>
 
@@ -193,7 +195,7 @@ text-align: left;
 					<!-- 검색결과가 없거나 보여줄 데이터가 없는 경우 내용없음 출력 -->
 						<c:if test="${fn:length(list)==0 }">
 							<tr>
-								<td colspan="4" style="text-align: center">내용없음</td>
+								<td colspan="5" style="text-align: center">내용없음</td>
 							</tr>
 						</c:if>
 

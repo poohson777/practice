@@ -61,6 +61,10 @@ font-weight: bold;
 	background-color: pink;
 }
 
+.tdStyle{
+	text-align: right;
+}
+
 .search {
 	width: 33%;
 	margin-left: 33%;
@@ -173,25 +177,24 @@ text-align: left;
 
 		<div class="outer">
 			<!-- Table -->
-			<h3>한신이 멍튱이</h3>
+			<h3><b>Member Management</b></h3>
 			<div class="table-wrapper">
 				<table style="table-layout: fixed;">
 					<colgroup>
-						   <col style="width: 15%;" />
-    <col style="width: 35%;" />
-    <col style="width: 10%;" />
-    <col style="width: 25%;" />
-    <col style="width: 25%;" />
-
+	  					<col style="width: 15%;" />
+	  					<col style="width: 15%;" />
+	 					<col style="width: 30%;" />
+	    				<col style="width: 20%;" />
+	    				<col style="width: 20%;" />
 					</colgroup>
 
 					<thead> 
 					<tr>
 						<th>ID</th>
 						<th>Name</th>
-						<th style="text-align: right;">RegDate</th>
-						<th style="text-align: right;">Role</th>
-						<th style="text-align: right;">Use Y/N</th>
+						<th style="text-align: center;">RegDate</th>
+						<th class="tdStyle">Role</th>
+						<th class="tdStyle">Use Y/N</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -204,34 +207,12 @@ text-align: left;
 
 						<c:forEach items="${list}" var="vo">
 							<tr>
-								<td class="uid"><c:out value="${vo.uid}" /></td>								
-								<td class="box" id="toread" data-bno="${vo.uname}">
-								<span class="regdate"> <c:out value="${vo.regdate}" /></span>
-							 	<span class="role">[<c:out value = "${vo.role}"></c:out>]</span>
-									<span class="ico"> 
-										<c:if test="${vo.checkNew()}">
-											<img src="/resources/images/new.jpg">
-										</c:if>
-									</span> 
-									
-								</td>
-								 <td style="text-align: right">
-									<c:out value="${vo.viewcnt}" />
-								</td> 
-								<td style="text-align: right">
-									<c:out value="${vo.writer}" />
-								</td>
-	
-
-								<td style="text-align: right">
-									<c:if test="${vo.checkNew()}">
-										<fmt:formatDate value="${vo.regdate}" pattern="HH:mm" />
-									</c:if> 
-									<c:if test="${!vo.checkNew()}">
-										<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd" />
-									</c:if>
-								</td>
-									</tr>
+								<td><c:out value="${vo.uid}" /></td>	
+								<td ><c:out value="${vo.uname}" /></td>	
+								<td class="tdStyle"><c:out value="${vo.regdate}" /></td>	
+								<td class="tdStyle"><c:out value="${vo.role}" /></td>
+								<td class="tdStyle"><c:out value="${vo.useYN}" /></td>															
+							</tr>
 						</c:forEach>
 					</tbody>
 					<tfoot>
@@ -265,18 +246,13 @@ text-align: left;
 					<div class="3u 12u$(small)">
 						<div class="select-wrapper">
 							<select name="type" id="category">
+								<option value="u"
+									<c:out value="${cri.type eq 'u' ? 'selected' : '' }"/>>id</option>
 								<option value="n"
-									<c:out value="${cri.type == 'n' ? 'selected' : '' }"></c:out>>--category--</option>
-								<option value="t"
-									<c:out value="${cri.type eq 't' ? 'selected' : '' }"/>>title</option>
-								<option value="c"
-									<c:out value="${cri.type eq 'c' ? 'selected' : '' }"/>>content</option>
-								<option value="w"
-									<c:out value="${cri.type eq 'w' ? 'selected' : '' }"/>>writer</option>
-								<option value="tc"
-									<c:out value="${cri.type eq 'tc' ? 'selected' : '' }"/>>title+content</option>
-								<option value="tcw"
-									<c:out value="${cri.type eq 'tcw' ? 'selected' : '' }"/>>title+content+writer</option>
+									<c:out value="${cri.type eq 'n' ? 'selected' : '' }"/>>name</option>
+								<option value="r"
+									<c:out value="${cri.type eq 'r' ? 'selected' : '' }"/>>regdate</option>
+
 							</select>
 						</div>
 					</div>
@@ -311,55 +287,20 @@ text-align: left;
 				var type = $("#category")[0].value;
 				var keyword = $('#query').val();
 
-				if (type === 'n'|| keyword === '') {
+				if (keyword === '') {
 					return;
 				};
-				self.location = "/freeboard/list"+'${pm.makeQuery(1)}'+"&type="
+				self.location = "/member/memberlist"+'${pm.makeQuery(1)}'+"&type="
 								+ $("select option:selected").val()
 								+ "&keyword="+ encodeURIComponent(keyword);
 			});
-
-			$("#regbtn").on("click",function(e) {
-				console.log("clicked...........ssddddd............");
-				self.location = "/freeboard/register${cri.makeSearch(cri.page)}";
-
-			});
-
-			$(".box").on("click",function(e) {
-
-				var bno = $(this).attr("data-bno");
-				var link = '${cri.makeSearch(cri.page)}';
-
-				self.location = "/freeboard/read"+ link + "&bno=" + bno;
-			});
-
-			console.log("history:" + history.state);
-
-			var msg = '<c:out value="${msg}"/>';
-
-			if (msg == "success" && !history.state) {
-				alert("등록이 완료되었습니다.");
-				}
-			if (msg == "fail" && !history.state) {
-				alert("등록이 실패하였습니다. 내용을 똑바로 입력하세요.");
-				}
-			if (msg == "successRemove" && !history.state) {
-				alert("삭제가 완료되었습니다.");
-				}
-			if (msg == "failRemove" && !history.state) {
-				alert("삭제에 실패하였습니다.");
-				}
-			history.replaceState({}, null, null);
-			
+	
 			$(".lOutbtn").on("click", function(e) {
 				
 				alert("로그아웃 되었습니다.");				
 			});
 		});
 	</script>
-
-
-
 
 	<!--@@@검색@@@ -->
 
