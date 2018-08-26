@@ -190,7 +190,7 @@ text-align: left;
 						<th>ID</th>
 						<th>Name</th>
 						<th style="text-align: right;">RegDate</th>
-						<th style="text-align: right;">Grade</th>
+						<th style="text-align: right;">Role</th>
 						<th style="text-align: right;">Use Y/N</th>
 					</tr>
 					</thead>
@@ -204,10 +204,10 @@ text-align: left;
 
 						<c:forEach items="${list}" var="vo">
 							<tr>
-								<td class="bno"><c:out value="${vo.bno}" /></td>								
-								<td class="box" id="toread" data-bno="${vo.bno}">
-								<span class="title"> <c:out value="${vo.title}" /></span>
-							 	<span class="count">[<c:out value = "${vo.replycnt}"></c:out>]</span>
+								<td class="uid"><c:out value="${vo.uid}" /></td>								
+								<td class="box" id="toread" data-bno="${vo.uname}">
+								<span class="regdate"> <c:out value="${vo.regdate}" /></span>
+							 	<span class="role">[<c:out value = "${vo.role}"></c:out>]</span>
 									<span class="ico"> 
 										<c:if test="${vo.checkNew()}">
 											<img src="/resources/images/new.jpg">

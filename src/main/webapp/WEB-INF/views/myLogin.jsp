@@ -37,6 +37,7 @@
 
 .actions{
 float: right;
+margin-right: 5px;
 }
 
 .uiduid{
@@ -114,10 +115,10 @@ height: 3rem;
 						<label for="copy">remember-me</label>
 						</div>
 						<div class="12u$">
-							<ul class="actions">
-								<button class="lbtn">login</button>								
+								<button class="lbtn actions">login</button>								
 								<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
-							</ul>
+								<button class="jbtn actions" >Join</button>
+					
 						</div>
 					</div>
 				</form>
@@ -155,25 +156,27 @@ height: 3rem;
 	<script>
 	
 		$(document).ready(function(e) {
-			$(".actions").on("click", ".list", function(e) {
-				self.location = "/board/list${cri.makeSearch(cri.page)}";
-			});
-			
-/* 			$(".lbtn").on("click", function(e) {
-				self.location = "/index";
-			}); */
-			
-			var error = "${error}"
+			$(".lbtn").on("click", ".list", function(e) {
+				
+				var error = "${error}";
+				
 				if(error == "true"){
 					alert("아이디나 비밀번호를 확인하세요.");
 				}
+				
+				self.location = "/board/list${cri.makeSearch(cri.page)}";
+			});
 			
-			var msg = '<c:out value="${msg}"/>';		
+ 			$(".jbtn").on("click", function(e) {
+ 				e.preventDefault();
+				self.location = "/join";
+// 				var msg = '<c:out value="${msg}"/>';		
 
-			if (msg == "join") {
-				alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
-				}
-
+// 				if (msg == "join") {
+// 					alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
+// 				}
+			});
+		
 			
 		});
 				

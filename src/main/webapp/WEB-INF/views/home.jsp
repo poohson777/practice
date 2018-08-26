@@ -133,9 +133,9 @@ margin-top: 5px
 	<sec:authentication property="principal" var="user"/>
 	<div class="btnlogOut1">
 	<strong>${user.username}</strong>님 환영합니다.
+	<button class="lOutbtn">logout</button>
 	</div>
 	<div class="btnlogOut2">
-	<button class="lOutbtn">logout</button>
 	</div>
 	<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
 	</form>
@@ -152,7 +152,7 @@ margin-top: 5px
 			<li><a href="/up/ajax">Best Food Truck</a></li>
 			<li><a href="/freeboard/list">Free Board</a></li>
 			<li><a href="/member/memberlist">Management Board</a></li>
-			<li><a href="/join">Join</a></li>
+			<!-- <li><a href="/join">Join</a></li> -->
 		</ul>
 		<br><br><br><br><br><br><br><br><br>
 		<ul>

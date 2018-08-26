@@ -53,7 +53,7 @@ public class UserMapperTests {
 	@Test
 	public void TestUpdatePassword() throws Exception{
 		
-		String mid = "zzz";
+		String mid = "test3";
 		String empw = encoder.encode("1111");
 		log.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+empw);
 		

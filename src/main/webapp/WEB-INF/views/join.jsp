@@ -63,6 +63,12 @@ padding: 6rem 0 15rem 0;
 	width: 100%;
 }
 
+.uidCheck{
+	width: 25%;
+	margin-top: 27px;
+	
+}
+
 .emailinput{
 	width: 100%;
 }
@@ -124,7 +130,7 @@ height: 3rem;
 						</div>
 						
 						<div class="uidCheck">
-						<button class="idCheck">ID CHECK</button>
+						<button class="idCheck" style="height:33px;">ID CHECK</button>
 						<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
 					</div>
 						

@@ -18,9 +18,6 @@
   </insert>
 
     
-    
-    
-    
   <select id="read" resultType="org.candy.domain.ReplyVO">
     select * from tbl_review where rno = #{rno}
   </select>

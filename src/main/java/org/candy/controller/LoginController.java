@@ -52,13 +52,13 @@ public class LoginController {
 	}*/	
 	@GetMapping("/join")
 	public void getJoin() {
-		
+		System.out.println("TEST1");
 	}
 	
 	@PostMapping("/join")
 	public String postJoin(UserVO vo, RedirectAttributes rttr) {
 		log.info("vo,,,"+vo);		
-
+		System.out.println("TEST2");
 		String uid = vo.getUid();
 		String upw = vo.getUpw();
 		String uname = vo.getUname();
@@ -75,6 +75,7 @@ public class LoginController {
 			rttr.addFlashAttribute("msg", "joinFail");
 			return "redirect:/join";
 		}
+		System.out.println("TEST3");
 		return "redirect:/myLogin";
 	}	
 	
