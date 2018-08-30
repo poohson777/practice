@@ -10,4 +10,6 @@ public interface MemberService {
 	   public List<UserVO> list(Criteria cri);
 	   
 	   public int getTotal(Criteria cri);
+	   
+	   public UserVO read(String uid);
 }

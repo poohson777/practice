@@ -29,4 +29,11 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.getTotal(cri);
 	}
 
+	@Override
+	public UserVO read(String uid) {
+		
+		log.info("MemberServiceImpl.......read.....");
+		return mapper.read(uid);
+	}
+
 }

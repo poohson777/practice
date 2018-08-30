@@ -35,4 +35,14 @@ public class MemberController {
 		
 	}
 
+	@GetMapping("/memberread")
+	public void memberread(@ModelAttribute("cri")Criteria cri, @ModelAttribute("uid") String uid,Model model) throws Exception{
+		log.info("Read.....");
+		model.addAttribute("vo", service.read(uid));
+		log.info("Crireadread post"+cri.getPage());
+
+		
+	}	
+	
+	
 }
