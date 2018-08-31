@@ -33,6 +33,9 @@ public class MemberController {
 				new PageMaker(cri, totalCount);
 		model.addAttribute("pm",pm);		
 		
+		
+		
+		
 	}
 
 	@GetMapping("/memberread")
