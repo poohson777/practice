@@ -32,9 +32,7 @@ public class MemberController {
 		PageMaker pm =
 				new PageMaker(cri, totalCount);
 		model.addAttribute("pm",pm);		
-		
-		
-		
+	
 		
 	}
 
