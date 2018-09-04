@@ -61,23 +61,6 @@
 
 }
 
-#ModalLayer {
-            display: none;
-            position: relative;
-            background-color: white;
-        }
-
-#modalLayer .modalContent {
-            width: 440px;
-            height: 200px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            z-index: 11;
-            background: #fff;
-        }
         
        
 </style>
@@ -147,16 +130,7 @@
 					<button class="fbtn">forced exit</button>
 					<button class="list">Member list</button>
 					<div class="wrapper"></div>
-					
-					<div id="ModalLayer"> 
-					 <div class="modalContent">
-						<h3>Test Modal</h3>
-   						<p>이 창은 모달창입니다.</p>
-    					<button id="mokbtn">확인</button>
-    					<button id="mcbtn">닫기</button>
-					
-					</div>
-					</div>
+				
 
 				</div>
 				
@@ -177,11 +151,7 @@
 	<script>
 		 
 		$(document).ready(function(e) {
-			
-			var ModalLayer = $("#ModalLayer");
-			var modalCont = $(".modalContent");
-		    var marginLeft = modalCont.outerWidth() / 2;
-		    var marginTop = modalCont.outerHeight() / 2;
+	
 		
 		    	/* 목록가기 */
 					$(".list").on("click", function(e) {
@@ -196,18 +166,18 @@
 					$(".fbtn").on("click", function(e) {
 						
 						console.log("강퇴하자요");
-						alert("탈퇴 시키겠습니까?");
+						if(confirm("탈퇴 시키겠습니까?")){
+							alert("탈퇴되었습니다.");
+						}
 					
 					});
 				/* 활동중지 버튼*/
 					
 					$(".sbtn").on("click", function(e) {
+
+
+						console.log("활동중지 모달창을 띄우자");
 						
-						console.log("활동중지 모달창을 띄우자요");
-						ModalLayer.fadeIn("slow");
-						modalCont.css({"margin-top": -marginTop, "margin-left": -marginLeft});
-						 $(this).blur();
-				            $(".modalContent > a").focus();
 						
 					});
 		
@@ -216,6 +186,7 @@
 		
 		
 		});
+		
 	</script>
 
 

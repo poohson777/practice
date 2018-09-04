@@ -197,7 +197,7 @@ text-align: left;
 						<th class="tdStyle">Use Y/N</th>
 					</tr>
 					</thead>
-					<tbody>
+					<tbody >
 					<!-- 검색결과가 없거나 보여줄 데이터가 없는 경우 내용없음 출력 -->
 						<c:if test="${fn:length(list)==0 }">
 							<tr>
@@ -207,11 +207,13 @@ text-align: left;
 
 						<c:forEach items="${list}" var="vo">
 							<tr>
-								<td><c:out value="${vo.uid}" /></td>	
-								<td ><c:out value="${vo.uname}" /></td>	
+							
+								<td ><c:out value="${vo.uid}" /></td>	
+								<td class="uname"><c:out value="${vo.uname}" /></td>	
 								<td class="tdStyle"><c:out value="${vo.regdate}" /></td>	
 								<td class="tdStyle"><c:out value="${vo.role}" /></td>
-								<td class="tdStyle"><c:out value="${vo.useYN}" /></td>															
+								<td class="tdStyle"><c:out value="${vo.useYN}" /></td>	
+																						
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -281,6 +283,18 @@ text-align: left;
 		crossorigin="anonymous"></script>
 	<script>
 		$(document).ready(function() {
+			
+			$("tbody tr td").on("click",function(e){
+				
+				console.log("td... 클릭......");
+				
+				var uid = $(this).attr("data-uid");
+			/* 	var link = '${cri.makeSearch(cri.page)}'; */
+
+				self.location = "/member/memberread"+"?uid="+uid;
+				 
+			});
+			
 			$("#search").on("click",function(e) {
 				console.log("clicked...............................");
 				console.log(encodeURIComponent($('#keywordInput').val()));
