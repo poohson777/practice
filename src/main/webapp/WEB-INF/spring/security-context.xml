@@ -28,13 +28,13 @@
 		 authentication-failure-handler-ref="loginFailure"
 		 
 		 />
+	
 		
 		<security:logout invalidate-session="true" logout-success-url="/home" />
 
 		<security:remember-me key="fft" token-validity-seconds="3600" data-source-ref="dataSource" />
 
 	</security:http>
-
 
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="customUserService">
@@ -43,7 +43,6 @@
 
 		</security:authentication-provider>
 	</security:authentication-manager>
-
 
 
 

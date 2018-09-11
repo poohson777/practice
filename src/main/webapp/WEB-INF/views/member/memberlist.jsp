@@ -119,7 +119,6 @@ text-align: left;
 </head>
 <body class="subpage">
 
-	<!--  -->
 	<!-- Header -->
 	<header id="header">
 		<div class="logo">

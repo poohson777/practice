@@ -83,7 +83,30 @@ a{color:#000;}
 	<!-- Header -->
 	<header id="header">
 		<div class="logo">
-	<div class="loginbtn">
+			
+		<div class="loginbtn">
+
+<sec:authorize access="isAnonymous()">
+	<form action="/myLogin">
+	<button>login</button>
+	
+	</form>	
+</sec:authorize>
+
+<div class="logOutbtn">
+<sec:authorize access="isAuthenticated()">
+	<form action="/logout" method="post" >
+	<sec:authentication property="principal" var="user"/>
+	<div class="btnlogOut1">
+	<strong>${user.username}</strong>님 환영합니다.
+	</div>
+	<div class="btnlogOut2">
+	<button class="lOutbtn">logout</button>
+	</div>
+<%-- 	<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}"> --%>
+	</form>
+</sec:authorize>
+</div>
 
 		 </div>
 		</div>
@@ -116,7 +139,7 @@ a{color:#000;}
 				<div class="table-wrapper">
 					<h3>Member Info</h3>
 					<table class="alt">
-	
+
 						<tbody>
 								<tr>
 								<td >USER ID </td>
@@ -135,6 +158,10 @@ a{color:#000;}
 								<tr>
 								<td>활동여부</td>
 								<td><c:out value="${vo.useYN}" /></td>
+								</tr>
+								<tr>
+								<td>활동중지기간</td>
+								<td><c:out value="${vo.ctrdate}"/></td>
 								</tr>
 						</tbody>
 						

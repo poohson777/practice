@@ -152,13 +152,13 @@ text-align: center;
 				<form method="post" action="register" id="registerForm">
 					<div class="row uniform">
 						<div class="6u 12u$(xsmall)">
-							<input type="text" name="title" id="name" value="제목"
+							<input type="text" name="title" id="name" 
 								placeholder="title" />
 						</div>
 
 						<div class="6u 12u$(xsmall)">
 
-						<input type="text" name="writer" id="writer" value="user01"/>
+						<input type="text" name="writer" id="writer" value="${user.username}" readonly="readonly"/>
 							<%-- <input type="text" name="writer" id="writer" value='<sec:authentication property="principal.username"/>' 
 							readonly="readonly"	placeholder="writer" /> --%>
 
@@ -212,6 +212,17 @@ text-align: center;
 
 $(document).ready(function(){
 
+	var csrfToken = "${_csrf.token}";
+	
+	 function setCsrf(token){
+       	
+       	$.ajaxSetup({
+               headers:
+               { 'X-CSRF-TOKEN':token }
+           });
+       	
+       }
+
 	
 	
 	var template = Handlebars.compile($("#template").html());
@@ -234,6 +245,8 @@ if(fileSize<maxSize){
 		var formData = new FormData();
 		console.log("size", fileSize);
 		formData.append("file" , file);
+		
+		setCsrf(csrfToken);
 		$.ajax({
 			url: '/ex/uploadAjax',
 			data:formData,
@@ -280,6 +293,7 @@ if(fileSize<maxSize){
    		console.log("click remove....");
 		var that = $(this);
 		
+		setCsrf(csrfToken);
 		$.ajax({
 			url: '/ex/deleteFile',
 			type: 'POST',

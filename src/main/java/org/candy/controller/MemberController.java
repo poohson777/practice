@@ -57,8 +57,10 @@ public class MemberController {
 		
 		if(vo.getCtrdate() > 0) {
 			vo.setCtrdate(vo.getCtrdate() * 7);
-		}		
+		}	
+		
 		service.suspension(vo);
+
 		
 		return new ResponseEntity<String>("success",HttpStatus.OK);
 		
