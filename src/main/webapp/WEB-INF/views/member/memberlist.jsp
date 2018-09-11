@@ -197,7 +197,7 @@ text-align: left;
 						<th class="tdStyle">Use Y/N</th>
 					</tr>
 					</thead>
-					<tbody >
+					<tbody>
 					<!-- 검색결과가 없거나 보여줄 데이터가 없는 경우 내용없음 출력 -->
 						<c:if test="${fn:length(list)==0 }">
 							<tr>
@@ -205,16 +205,18 @@ text-align: left;
 							</tr>
 						</c:if>
 
-						<c:forEach items="${list}" var="vo">
-							<tr>
+						<c:forEach items="${list}" var="vo" >
 							
-								<td ><c:out value="${vo.uid}" /></td>	
+							<tr  >
+								<td data-uid="${vo.uid}"><c:out value="${vo.uid}" />
+<%-- 								<input type="hidden" id="uid" value="${vo.uid }"> --%>
+								</td>	
 								<td class="uname"><c:out value="${vo.uname}" /></td>	
 								<td class="tdStyle"><c:out value="${vo.regdate}" /></td>	
 								<td class="tdStyle"><c:out value="${vo.role}" /></td>
-								<td class="tdStyle"><c:out value="${vo.useYN}" /></td>	
-																						
+								<td class="tdStyle"><c:out value="${vo.useYN}" /></td>															
 							</tr>
+							
 						</c:forEach>
 					</tbody>
 					<tfoot>
@@ -286,12 +288,18 @@ text-align: left;
 			
 			$("tbody tr td").on("click",function(e){
 				
-				console.log("td... 클릭......");
-				
 				var uid = $(this).attr("data-uid");
-			/* 	var link = '${cri.makeSearch(cri.page)}'; */
+				
+				if(uid !=null){
+				
+					console.log("td... 클릭......");
 
-				self.location = "/member/memberread"+"?uid="+uid;
+					console.log("uid....",uid);
+
+ 					self.location = "/member/memberread"+"?uid="+uid; 
+				} else {
+					alert("id 값을 클릭시 상세페이지로 넘어갑니다.");
+				}
 				 
 			});
 			

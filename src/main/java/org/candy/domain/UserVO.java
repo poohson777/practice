@@ -10,8 +10,8 @@ import lombok.Data;
 public class UserVO {
 
 	private String uid, upw, uname, email, phone_number, role, useYN;
+	private int ctrdate;
 	private Date regdate, updatedate;
-	
 	private List<UserAuthVO> authList;
 	
 	public UserVO() {

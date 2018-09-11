@@ -36,4 +36,11 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.read(uid);
 	}
 
+	@Override
+	public void suspension(UserVO vo) {
+		
+		mapper.suspension(vo);
+		
+	}
+
 }

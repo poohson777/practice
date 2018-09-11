@@ -629,27 +629,23 @@ text-align: center;
         		 
         		 setCsrf(csrfToken);
         		 
-            	$.ajax({
-               	 type: 'post',
-               	 url: "/reviews/new",
-               	 headers: {
-               	     "Content-type": "application/json"
-               	 },
-               	 dataType: "text",
-               	 data: JSON.stringify(data),
-               	 success: function (result) {
-               	     
-
-                     loadList(bno, 1);
-
-                     alert("등록이 완료되었습니다.");
-                     inputContent.val("");
-                     inputReplyer.val("");
-                     reContent.val("");
-                     reReplyer.val("");
-                     
-                }
-            });      		
+        		 $.ajax({
+        			 
+              		 type: 'post',
+              		 url: "/reviews/new",
+             		 headers: {"Content-type": "application/json"},
+               		 dataType: "text",
+               		 data: JSON.stringify(data),
+               		 success: 
+               			function (result) {
+              			     loadList(bno, 1);
+                  			 alert("등록이 완료되었습니다.");
+                 		     inputContent.val("");
+                 		   	 inputReplyer.val("");
+                    		 reContent.val("");
+                    		 reReplyer.val("");
+               			}
+           		});      		
         	
             console.log("세이브리플 페이지는"+reviewPage);
         }

@@ -12,4 +12,6 @@ public interface MemberService {
 	   public int getTotal(Criteria cri);
 	   
 	   public UserVO read(String uid);
+	   
+	   public void suspension(UserVO vo);
 }

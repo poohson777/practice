@@ -5,11 +5,14 @@
     Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <head>
 
@@ -36,10 +39,11 @@
 }
 
 .outer {
-	padding-top: 5%;
+	padding: 5%;
 	background-color: #ffffff;
 	background-color: rgba(255, 255, 255, 0.6);
 }
+
  .listDiv li {
             list-style-type: none;
 
@@ -61,8 +65,15 @@
 
 }
 
-        
-       
+a{color:#000;}
+
+.mask
+{width:100%; height:100%; position:fixed; left:0; top:0; z-index:10; background:#000; opacity:.5; filter:alpha(opacity=50);}
+
+#modalLayer{display:none; position:relative;}
+#modalLayer .modalContent{width:440px; height:200px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
+#modalLayer .modalContent button{position:absolute; right:0; top:0; cursor:pointer;}
+  
 </style>
 
 </head>
@@ -107,30 +118,53 @@
 					<table class="alt">
 	
 						<tbody>
-							
-								<td>USER ID </td>
-								<td ><strong><c:out value="${vo.uid}" /></strong></td>
-								<tr></tr>
-								
+								<tr>
+								<td >USER ID </td>
+								<td ><c:out value="${vo.uid}" />
+								<input type="hidden" id="uid" value="${vo.uid}">
+								</td>
+								</tr>
+								<tr>
 								<td>USER NAME </td>
 								<td><c:out value="${vo.uname}" /></td>
-								<tr></tr>
-								
-								<td> 가입일 </td>
+								</tr>
+								<tr>
+								<td>가입일 </td>
 								<td> <fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd" /></td>
-								<tr></tr>
-								
+								</tr>
+								<tr>
 								<td>활동여부</td>
 								<td><c:out value="${vo.useYN}" /></td>
-								<tr></tr>
+								</tr>
 						</tbody>
 						
+														
 					</table>
-					<button class="sbtn">suspension</button>
+					<button class="modalLink" onclick="modalLayer">suspension</button>
 					<button class="fbtn">forced exit</button>
 					<button class="list">Member list</button>
-					<div class="wrapper"></div>
-				
+					<div id="modalLayer">
+						<div class="modalContent">
+							<ul>
+								<li>
+								<input type="radio" id="ctnValue1" name="ctnValue" value="1" checked>
+								<label for="ctnValue1">1주</label>
+								</li>
+								<li>
+								<input type="radio" id="ctnValue2" name="ctnValue" value="2">
+								<label for="ctnValue2">2주</label>
+								</li>
+								<li>
+								<input type="radio" id="ctnValue3" name="ctnValue" value="3">
+								<label for="ctnValue3">3주</label>
+								</li>
+								
+							</ul>
+					   		<button class="sbtn" style="vertical-align:bottom; position: static;" type="button">확인</button>
+						</div>
+						
+					</div>
+										
 
 				</div>
 				
@@ -146,11 +180,22 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script id="templateAttach" type="text/x-handlebars-template">
+
 </script>
 	
 	<script>
 		 
 		$(document).ready(function(e) {
+			var csrfToken = "${_csrf.token}";
+			
+			 function setCsrf(token){
+		        	
+		        	$.ajaxSetup({
+		                headers:
+		                { 'X-CSRF-TOKEN':token }
+		            });
+		        	
+		        }
 	
 		
 		    	/* 목록가기 */
@@ -172,19 +217,63 @@
 					
 					});
 				/* 활동중지 버튼*/
-					
+					  	
+				
+				 
+				
 					$(".sbtn").on("click", function(e) {
-
 
 						console.log("활동중지 모달창을 띄우자");
 						
+						var weeks = $('input[name="ctnValue"]:checked').val();
+						var uid = $("#uid").val();
 						
+						
+						var data = {ctrdate: weeks, uid:uid};
+						
+						
+						console.log(data);
+						
+						 setCsrf(csrfToken);
+						$.ajax({
+		        			 
+		              		 type: 'post',
+		              		 url: "/member/suspension",
+		             		 headers: {"Content-type": "application/json"},
+		               		 dataType: "text",
+		               		 data: JSON.stringify(data),
+		               		 success: 
+		               			function (result) {
+		               				alert(weeks+"주 동안 계정이 정지됩니다");
+		               			}
+		           		});      		
+		        	
+															
 					});
-		
-		
-		
-		
-		
+					
+// 					$("input[name='ctnValue']").change(function(e){
+// 						var weeks = $('input[name="ctnValue"]:checked').val();
+// 						alert(weeks);
+// 					});
+				
+			  var modalLayer = $("#modalLayer");
+			  var modalLink = $(".modalLink");
+			  var modalCont = $(".modalContent");
+			  var marginLeft = modalCont.outerWidth()/2;
+			  var marginTop = modalCont.outerHeight()/2; 
+
+			  modalLink.click(function(){
+			    modalLayer.fadeIn("slow");
+			    modalCont.css({"margin-top" : -marginTop, "margin-left" : -marginLeft});
+			    $(this).blur();
+			    $(".modalContent > a").focus(); 
+			    return false;
+			  });
+
+			  $(".modalContent > button").click(function(){
+			    modalLayer.fadeOut("slow");
+			    modalLink.focus();
+			  });		
 		});
 		
 	</script>

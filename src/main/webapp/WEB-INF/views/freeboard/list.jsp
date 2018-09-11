@@ -185,12 +185,14 @@ text-align: left;
 					</colgroup>
 
 					<thead>
+					<tr>
 						<th>Bno</th>
 						<th>Title</th>
 						<th style="text-align: right;">Views</th>
 						<th style="text-align: right;">Writer</th>
 						<th style="text-align: right;">Regdate</th>
 						</tr>
+						</thead>
 					<tbody>
 					<!-- 검색결과가 없거나 보여줄 데이터가 없는 경우 내용없음 출력 -->
 						<c:if test="${fn:length(list)==0 }">
@@ -327,7 +329,7 @@ text-align: left;
 
 				var bno = $(this).attr("data-bno");
 				var link = '${cri.makeSearch(cri.page)}';
-
+				
 				self.location = "/freeboard/read"+ link + "&bno=" + bno;
 			});
 
