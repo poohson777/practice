@@ -5,3 +5,4 @@
 2018.09.02 Oracle join,union...
 2018.09.04 MemberManagementList 수정중
 2018.09.11 Member~ List 수정완료, 활동중지ing..
+2018.09.11 FreeBorad register 수정
