@@ -11,10 +11,10 @@ public class FreeboardVO {
 	private String title, content, writer;
 	private Date regdate, updatedate;
 
-	private String[] files; //µðºñ¿¡´Â ¾øÁö¸¸ Ã·ºÎÆÄÀÏ¿¡ ÇÊ¿äÇÑ°Í... ¿©·¯°³ »èÁ¦ÇÒ¶§¸¸ ¾²ÀÓ
+	private String[] files; //ï¿½ï¿½ñ¿¡´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã·ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ê¿ï¿½ï¿½Ñ°ï¿½... ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	
-	//new¾ÆÀÌÄÜÀÛ¾÷
+	//newï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¾ï¿½
 	private static final Long ADAY = 1000 * 60 * 60 * 24L; 
 
 	public boolean checkNew() { 

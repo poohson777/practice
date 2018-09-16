@@ -1,6 +1,7 @@
 package org.candy.controller;
 
 import org.candy.domain.UserVO;
+import org.candy.service.MemberService;
 import org.candy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,15 +30,18 @@ public class LoginController {
 	@Setter(onMethod_= {@Autowired})
 	private UserService service;
 	
+/*	@Setter(onMethod_= {@Autowired})
+	private UserVO vo;*/
+	
 	@PostMapping("/myLogin")
 	public void loginInput(String error, Model model ) {
 		
 		log.info("error......"+ error);
-		
+	/*	log.info("ctrdate가 찍히나요..............."+ vo.getCtrdate());*/
 		
 		if(error != null) {
 			model.addAttribute("error", error);
-		}		
+		}
 		
 	}
 	@GetMapping("/myLogin")

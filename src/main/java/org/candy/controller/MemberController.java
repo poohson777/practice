@@ -55,8 +55,9 @@ public class MemberController {
 			
 		log.info("활동중지 controller");	
 		
-		if(vo.getCtrdate() > 0) {
-			vo.setCtrdate(vo.getCtrdate() * 7);
+		if(vo.getCtrrange() > 0) {
+			log.info("활동중지 ddddddddddd");	
+			vo.setCtrrange(vo.getCtrrange() * 7);
 		}	
 		
 		service.suspension(vo);

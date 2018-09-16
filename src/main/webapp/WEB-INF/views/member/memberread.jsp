@@ -74,6 +74,20 @@ a{color:#000;}
 #modalLayer .modalContent{width:440px; height:200px; padding:20px; border:1px solid #ccc; position:fixed; left:50%; top:50%; z-index:11; background:#fff;}
 #modalLayer .modalContent button{position:absolute; right:0; top:0; cursor:pointer;}
   
+  
+#header .logo .loginbtn{
+float: right;
+display: inline-block;
+text-align: right;
+}
+#header .logo .loginbtn .logOutbtn .btnlogOut1{
+float: left;
+margin-right: 10px;
+}
+#header .logo .loginbtn .logOutbtn .btnlogOut2{
+display: inline-block;
+text-align: left;
+}  
 </style>
 
 </head>
@@ -161,13 +175,13 @@ a{color:#000;}
 								</tr>
 								<tr>
 								<td>활동중지기간</td>
-								<td><c:out value="${vo.ctrdate}"/></td>
+								<td><fmt:formatDate value="${vo.ctrdate}" pattern="yyyy-MM-dd"/></td>
 								</tr>
 						</tbody>
 						
 														
 					</table>
-					<button class="modalLink" onclick="modalLayer">suspension</button>
+					<button class="modalLink">suspension</button>
 					<button class="fbtn">forced exit</button>
 					<button class="list">Member list</button>
 					<div id="modalLayer">
@@ -251,12 +265,12 @@ a{color:#000;}
 					$(".sbtn").on("click", function(e) {
 
 						console.log("활동중지 모달창을 띄우자");
-						
+					
 						var weeks = $('input[name="ctnValue"]:checked').val();
 						var uid = $("#uid").val();
 						
 						
-						var data = {ctrdate: weeks, uid:uid};
+						var data = {ctrrange: weeks, uid:uid};
 						
 						
 						console.log(data);
@@ -272,6 +286,7 @@ a{color:#000;}
 		               		 success: 
 		               			function (result) {
 		               				alert(weeks+"주 동안 계정이 정지됩니다");
+		               				self.location="/member/memberread?uid="+uid;
 		               			}
 		           		});      		
 		        	

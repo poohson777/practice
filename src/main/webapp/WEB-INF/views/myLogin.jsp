@@ -164,9 +164,13 @@ height: 3rem;
 				
 				if(error == "true"){
 					alert("아이디나 비밀번호를 확인하세요.");
+				}else if(error =="true2"){
+					alert("활동중지된 계정입니다.");
+				}else{
+					alert("TEST!");
 				}
 				
-				self.location = "/board/list${cri.makeSearch(cri.page)}";
+				/* self.location = "/board/list${cri.makeSearch(cri.page)}"; */
 			});
 			
  			$(".jbtn").on("click", function(e) {

@@ -202,6 +202,19 @@ text-align: center;
     display: inline-block;
 
 }
+#header .logo .loginbtn{
+float: right;
+display: inline-block;
+text-align: right;
+}
+#header .logo .loginbtn .logOutbtn .btnlogOut1{
+float: left;
+margin-right: 10px;
+}
+#header .logo .loginbtn .logOutbtn .btnlogOut2{
+display: inline-block;
+text-align: left;
+}
         
        
 </style>
@@ -228,30 +241,33 @@ text-align: center;
 
 <body class="subpage">
 
-	<!-- Header -->
+		<!-- Header -->
 	<header id="header">
 		<div class="logo">
-	<div class="loginbtn">
+			
+		<div class="loginbtn">
 
-
-<%-- <sec:authorize access="isAnonymous()">
-
-	<form action="/login" method="post">
+<sec:authorize access="isAnonymous()">
+	<form action="/myLogin">
 	<button>login</button>
-	<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
+	
 	</form>	
 </sec:authorize>
 
+<div class="logOutbtn">
 <sec:authorize access="isAuthenticated()">
-	<form action="/logout" method="post" ><sec:authentication property="principal" var="user"/>
-	<strong>${user.username}</strong> 님 환영합니다
-	<button>logout</button>
-	<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}">
+	<form action="/logout" method="post" >
+	<sec:authentication property="principal" var="user"/>
+	<div class="btnlogOut1">
+	<strong>${user.username}</strong>님 환영합니다.
+	</div>
+	<div class="btnlogOut2">
+	<button class="lOutbtn">logout</button>
+	</div>
+<%-- 	<input type="hidden" name = "${_csrf.parameterName}" value ="${_csrf.token}"> --%>
 	</form>
 </sec:authorize>
-
-
- --%>
+</div>
 
 		 </div>
 		</div>
@@ -260,13 +276,13 @@ text-align: center;
 	<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-
-			<li><a href="/freeboard/list">Home</a></li>
-
-			<li><a href="/up/ajax">Image gallery</a></li>
-			
+			<li><a href="/home">Home</a></li>
+			<li><a href="/up/ajax">Best Food Truck</a></li>
+			<li><a href="/freeboard/list">Free Board</a></li>
+			<li><a href="/member/memberlist">Management Board</a></li>
 		</ul>
 	</nav>
+
 	<!-- One -->
 	<section id="One" class="wrapper style3">
 		<div class="inner">
@@ -318,7 +334,7 @@ text-align: center;
 					</table>
 					
 					<div class= "mailbox-attachments clearfix uploadedList"></div>
-					<div id="map" style="width:1000px; height:400px;"></div>
+					<!-- <div id="map" style="width:1000px; height:400px;"></div> -->
 					
 					<div class="12u$">
 					
@@ -448,7 +464,7 @@ text-align: center;
 	<script>
 		 
 		$(document).ready(function(e) {
-			var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+		/* 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 			var options = { //지도를 생성할 때 필요한 기본 옵션
 				center: new daum.maps.LatLng(37.526571, 126.933590), //지도의 중심좌표.
 				level: 3 //지도의 레벨(확대, 축소 정도)
@@ -465,10 +481,10 @@ text-align: center;
 
 			// 마커가 지도 위에 표시되도록 설정합니다
 			marker.setMap(map);
+			 */
 			
 			
-			
-			var replyCnt = ${vo.recnt};
+			var replyCnt = ${vo.replycnt};
 			console.log("reviewCnt",reviewCnt);
 		    	/* 목록가기 */
 					$(".actions").on("click",".list", function(e) {

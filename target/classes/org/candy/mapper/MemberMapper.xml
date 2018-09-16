@@ -36,7 +36,7 @@
 	</select>
 	
 	<update id="suspension">
-		update tbl_user set ctrdate=DATE_ADD(now(), INTERVAL #{ctrdate} DAY) 
+		update tbl_user set ctrdate=DATE_ADD(now(), INTERVAL #{ctrrange} DAY) 
 		where uid=#{uid};
 	</update>
 </mapper>
